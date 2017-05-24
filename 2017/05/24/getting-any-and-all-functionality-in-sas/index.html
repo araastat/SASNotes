@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.21" />
+
+
+<title>Getting `any` and `all` functionality in SAS - SAS Notes</title>
+<meta property="og:title" content="Getting `any` and `all` functionality in SAS - SAS Notes">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="../../../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../../../css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../../../" class="nav-logo">
+    <img src="../../../../images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../../../about/">About</a></li>
+    
+    <li><a href="https://github.com/araastat/SASNotes">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/webbedfeet">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">1 min read</span>
+    
+
+    <h1 class="article-title">Getting `any` and `all` functionality in SAS</h1>
+
+    
+    <span class="article-date">2017/05/24</span>
+    
+
+    <div class="article-content">
+      <div id="get-the-functionality-of-any-and-allfrom-r-in-sas" class="section level2">
+<h2>Get the functionality of <code>any</code> and <code>all</code>(from R) in SAS</h2>
+<p>One way of doing this within <code>PROC SQL</code> is to use the <code>min</code> and <code>max</code> functions:</p>
+<pre class="sas"><code>PROC SQL;
+  SELECT    sex, min(age &lt; 18) as allMinors
+  FROM      sashelp.classes
+  GROUP BY  sex;
+  
+  SELECT    sex, max(height &gt;= 6*12) as someBBallHope
+  FROM      sashelp.classes
+  GROUP BY  sex;
+QUIT;</code></pre>
+<p>would correspond to</p>
+<pre class="r"><code>library(tidyverse)
+classes %&gt;% 
+  group_by(sex) %&gt;% 
+  summarise(allMinors = all(age &lt; 18))
+  
+classes %&gt;% 
+  group_by(sex) %&gt;% 
+  summarise(someBBallHope = any(height &gt;= 6*12))</code></pre>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="../../../../index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="../../../../images/hugo-logo.png" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+

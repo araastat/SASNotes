@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on SAS Notes</title>
+    <link>/categories/r/</link>
+    <description>Recent content in R on SAS Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 24 May 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Getting `any` and `all` functionality in SAS</title>
+      <link>/2017/05/24/getting-any-and-all-functionality-in-sas/</link>
+      <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/05/24/getting-any-and-all-functionality-in-sas/</guid>
+      <description>Get the functionality of any and all(from R) in SASOne way of doing this within PROC SQL is to use the min and max functions:
+PROC SQL;SELECT sex, min(age &amp;lt; 18) as allMinorsFROM sashelp.classesGROUP BY sex;SELECT sex, max(height &amp;gt;= 6*12) as someBBallHopeFROM sashelp.classesGROUP BY sex;QUIT;would correspond to
+library(tidyverse)classes %&amp;gt;% group_by(sex) %&amp;gt;% summarise(allMinors = all(age &amp;lt; 18))classes %&amp;gt;% group_by(sex) %&amp;gt;% summarise(someBBallHope = any(height &amp;gt;= 6*12))</description>
+    </item>
+    
+  </channel>
+</rss>
