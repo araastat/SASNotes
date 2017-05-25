@@ -6,8 +6,8 @@
 <meta name="generator" content="Hugo 0.19" />
 
 
-<title>Getting `any` and `all` functionality in SAS - SAS Notes</title>
-<meta property="og:title" content="Getting `any` and `all` functionality in SAS - SAS Notes">
+<title>Logistic regression - SAS Notes</title>
+<meta property="og:title" content="Logistic regression - SAS Notes">
 
 
 
@@ -16,11 +16,6 @@
 
 
 
-
-
-
-
-<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
 
 
 
@@ -62,10 +57,10 @@
     <span class="article-duration">1 min read</span>
     
 
-    <h1 class="article-title">Getting `any` and `all` functionality in SAS</h1>
+    <h1 class="article-title">Logistic regression</h1>
 
     
-    <span class="article-date">2017/05/24</span>
+    <span class="article-date">2017/05/25</span>
     
 
     <div class="article-content">
@@ -74,28 +69,7 @@
 
 <!-- BLOGDOWN-BODY-BEFORE -->
 <!-- /BLOGDOWN-BODY-BEFORE -->
-<div id="get-the-functionality-of-any-and-allfrom-r-in-sas" class="section level2">
-<h2>Get the functionality of <code>any</code> and <code>all</code>(from R) in SAS</h2>
-<p>One way of doing this within <code>PROC SQL</code> is to use the <code>min</code> and <code>max</code> functions:</p>
-<pre class="sas"><code>PROC SQL;
-  SELECT    sex, min(age &lt; 18) as allMinors
-  FROM      sashelp.classes
-  GROUP BY  sex;
-  
-  SELECT    sex, max(height &gt;= 6*12) as someBBallHope
-  FROM      sashelp.classes
-  GROUP BY  sex;
-QUIT;</code></pre>
-<p>would correspond to</p>
-<pre class="r"><code>library(tidyverse)
-classes %&gt;% 
-  group_by(sex) %&gt;% 
-  summarise(allMinors = all(age &lt; 18))
-  
-classes %&gt;% 
-  group_by(sex) %&gt;% 
-  summarise(someBBallHope = any(height &gt;= 6*12))</code></pre>
-</div>
+<p>One of the different things in SAS is that when we’re doing logistic regression using <code>PROC LOGISTIC</code>, what is modeled is the opposite of what R does. If we’re modeling a binary variable Y, R models Y=1 while SAS models Y=0, which means the odds ratios are reversed.</p>
 
     </div>
   </article>
@@ -118,18 +92,6 @@ classes %&gt;%
 
     </div>
     
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
-
-
-
-<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
-<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
-<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
-
-
 
     
 

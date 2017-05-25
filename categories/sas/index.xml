@@ -2,14 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Sas on SAS Notes</title>
-    <link>/categories/sas/</link>
+    <link>/categories/sas/index.xml</link>
     <description>Recent content in Sas on SAS Notes</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 24 May 2017 00:00:00 +0000</lastBuildDate>
+    <atom:link href="/categories/sas/index.xml" rel="self" type="application/rss+xml" />
     
-	<atom:link href="/categories/sas/index.xml" rel="self" type="application/rss+xml" />
-    
+    <item>
+      <title>Logistic regression</title>
+      <link>/2017/05/25/logistic-regression/</link>
+      <pubDate>Thu, 25 May 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/2017/05/25/logistic-regression/</guid>
+      <description>&lt;!-- BLOGDOWN-HEAD --&gt;
+&lt;!-- /BLOGDOWN-HEAD --&gt;
+
+&lt;!-- BLOGDOWN-BODY-BEFORE --&gt;
+&lt;!-- /BLOGDOWN-BODY-BEFORE --&gt;
+&lt;p&gt;One of the different things in SAS is that when we’re doing logistic regression using &lt;code&gt;PROC LOGISTIC&lt;/code&gt;, what is modeled is the opposite of what R does. If we’re modeling a binary variable Y, R models Y=1 while SAS models Y=0, which means the odds ratios are reversed.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Getting `any` and `all` functionality in SAS</title>
@@ -17,9 +29,34 @@
       <pubDate>Wed, 24 May 2017 00:00:00 +0000</pubDate>
       
       <guid>/2017/05/24/getting-any-and-all-functionality-in-sas/</guid>
-      <description>Get the functionality of any and all(from R) in SASOne way of doing this within PROC SQL is to use the min and max functions:
-PROC SQL;SELECT sex, min(age &amp;lt; 18) as allMinorsFROM sashelp.classesGROUP BY sex;SELECT sex, max(height &amp;gt;= 6*12) as someBBallHopeFROM sashelp.classesGROUP BY sex;QUIT;would correspond to
-library(tidyverse)classes %&amp;gt;% group_by(sex) %&amp;gt;% summarise(allMinors = all(age &amp;lt; 18))classes %&amp;gt;% group_by(sex) %&amp;gt;% summarise(someBBallHope = any(height &amp;gt;= 6*12))</description>
+      <description>&lt;!-- BLOGDOWN-HEAD --&gt;
+&lt;!-- /BLOGDOWN-HEAD --&gt;
+
+&lt;!-- BLOGDOWN-BODY-BEFORE --&gt;
+&lt;!-- /BLOGDOWN-BODY-BEFORE --&gt;
+&lt;div id=&#34;get-the-functionality-of-any-and-allfrom-r-in-sas&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Get the functionality of &lt;code&gt;any&lt;/code&gt; and &lt;code&gt;all&lt;/code&gt;(from R) in SAS&lt;/h2&gt;
+&lt;p&gt;One way of doing this within &lt;code&gt;PROC SQL&lt;/code&gt; is to use the &lt;code&gt;min&lt;/code&gt; and &lt;code&gt;max&lt;/code&gt; functions:&lt;/p&gt;
+&lt;pre class=&#34;sas&#34;&gt;&lt;code&gt;PROC SQL;
+  SELECT    sex, min(age &amp;lt; 18) as allMinors
+  FROM      sashelp.classes
+  GROUP BY  sex;
+  
+  SELECT    sex, max(height &amp;gt;= 6*12) as someBBallHope
+  FROM      sashelp.classes
+  GROUP BY  sex;
+QUIT;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;would correspond to&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+classes %&amp;gt;% 
+  group_by(sex) %&amp;gt;% 
+  summarise(allMinors = all(age &amp;lt; 18))
+  
+classes %&amp;gt;% 
+  group_by(sex) %&amp;gt;% 
+  summarise(someBBallHope = any(height &amp;gt;= 6*12))&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</description>
     </item>
     
   </channel>
