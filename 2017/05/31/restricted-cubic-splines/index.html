@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.19" />
+
+
+<title>Restricted cubic splines - SAS Notes</title>
+<meta property="og:title" content="Restricted cubic splines - SAS Notes">
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdn.bootcss.com/highlight.js/9.11.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="../../../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../../../css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../../../" class="nav-logo">
+    <img src="../../../../images/logo.jpeg"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../../../about/">About</a></li>
+    
+    <li><a href="https://github.com/araastat/SASNotes">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/webbedfeet">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">1 min read</span>
+    
+
+    <h1 class="article-title">Restricted cubic splines</h1>
+
+    
+    <span class="article-date">2017/05/31</span>
+    
+
+    <div class="article-content">
+      <!-- BLOGDOWN-HEAD -->
+<!-- /BLOGDOWN-HEAD -->
+
+<!-- BLOGDOWN-BODY-BEFORE -->
+<!-- /BLOGDOWN-BODY-BEFORE -->
+<p>Restricted cubic splines are a common flexible way to incorporate nonlinear effects into regression models. The usual way I’d use it in R is to use <code>rms::rcs</code>.</p>
+<p>In SAS it is now much easier to implement restricted cubic splines within models. At least in many procs there is now an EFFECT statement. For example, Rick Wicklin provides an example on <a href="http://blogs.sas.com/content/iml/2017/04/19/restricted-cubic-splines-sas.html">his blog</a>:</p>
+<pre class="sas"><code>proc glmselect data=cars;
+  effect spl = spline(weight / details naturalcubic basis=tpf(noint)                 
+                               knotmethod=percentiles(5) );
+   model mpg_city = spl / selection=none;         /* fit model by using spline effects */
+   output out=SplineOut predicted=Fit;            /* output predicted values for graphing */
+quit;
+ 
+title &quot;Restricted Cubic Spline Regression&quot;;
+proc sgplot data=SplineOut noautolegend;
+   scatter x=weight y=mpg_city;
+   series x=weight y=Fit / lineattrs=(thickness=3 color=red);
+run;</code></pre>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="../../../../index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="../../../../images/hugo-logo.png" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/highlight.min.js"></script>
+
+
+
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/r.min.js"></script>
+<script src="//cdn.bootcss.com/highlight.js/9.11.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+  </body>
+</html>
+
